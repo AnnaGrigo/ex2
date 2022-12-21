@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/annag/CLionProjects/ex2/Player.cpp
+Player.h
+C:/Users/annag/CLionProjects/ex2/Player.h
+
+C:/Users/annag/CLionProjects/ex2/Player.h
+Team.h
+C:/Users/annag/CLionProjects/ex2/Team.h
+wet2util.h
+C:/Users/annag/CLionProjects/ex2/wet2util.h
+
+C:/Users/annag/CLionProjects/ex2/Team.cpp
+Team.h
+C:/Users/annag/CLionProjects/ex2/Team.h
+
+C:/Users/annag/CLionProjects/ex2/Team.h
+wet2util.h
+C:/Users/annag/CLionProjects/ex2/wet2util.h
+
+C:/Users/annag/CLionProjects/ex2/UnionFind.cpp
+
+C:/Users/annag/CLionProjects/ex2/wet2util.h
+stdexcept
+-
+

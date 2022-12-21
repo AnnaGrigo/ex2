@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/annag/CLionProjects/ex2/RankTree.h
+iostream
+-
+wet2util.h
+C:/Users/annag/CLionProjects/ex2/wet2util.h
+
+C:/Users/annag/CLionProjects/ex2/rankTreeTester.cpp
+iostream
+-
+RankTree.h
+C:/Users/annag/CLionProjects/ex2/RankTree.h
+vector
+-
+ostream
+-
+random
+-
+chrono
+-
+algorithm
+-
+memory
+-
+assert.h
+-
+
+C:/Users/annag/CLionProjects/ex2/wet2util.h
+stdexcept
+-
+
