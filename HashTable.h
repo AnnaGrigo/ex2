@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-// Hashtable with chain hashing based on a linked list
+// Hashtable with chain hashing based on a linked list with load factor of 2
 
 // The node on the list
 // Contains an array and id
@@ -25,9 +25,9 @@ public:
     }
 
     Node(Node<Value> &other) {
-        this->value(other.value);
-        this->next(other.next);
-        this->id(other.id);
+        this->value = other.value;
+        this->next = other.next;
+        this->id = other.id;
     }
 
     ~Node() = default;
@@ -43,20 +43,23 @@ public:
             : head(nullptr) {
     }
 
-    // Adding an Value to the list
+    // Adding a Value to the list
     void addToList(Value value, int id);
 
-    // Deleting an Value from the list
+    // Deleting a Value from the list
     bool deleteValue(int id);
 
-    // Finding and returning an Value by the id
+    // Finding and returning a Value by the id
     Node<Value> *find(int id);
+
+    //delete all the list
+    void deleteList();
 };
 
 template<class Value>
 void List<Value>::addToList(Value value, int id) {
-    auto *a = new Node<Value>(value, this->head, id);
-    this->head = a;
+    auto *new_node = new Node<Value>(value, this->head, id);
+    this->head = new_node;
 }
 
 template<class Value>
@@ -97,29 +100,33 @@ Node<Value> *List<Value>::find(int id) {
     return nullptr;
 }
 
+template<class Value>
+void List<Value>::deleteList() {
+    Node<Value> *current = this->head;
+    Node<Value> *next;
+    while (current != nullptr) {
+        next = current->next;
+        delete current;
+        current = next;
+    }
+    this->head = nullptr;
+}
+
 // ----Hash Table----
 template<class Value>
 class HashTable {
 
-private:
+public:
     int size;
     int Values_amount;
     int load_factor;
-
-public:
     List<Value> *array;
 
-    HashTable(int size, int sizing_up_down);
+    explicit HashTable(int size);
 
     ~HashTable();
 
-    Value findAndReturn(int key);
-
-    int getSize() const;
-
-    int getCapacity() const;
-
-    bool isEmpty() const;
+    Node<Value> *find_HT(int key);
 
     Node<Value> *operator[](int place);
 
@@ -129,16 +136,17 @@ public:
 
     void resize(int to_change);
 
-    bool insert_Value(int id, Value value);
+    bool insert_HT(int id, Value value);
 
-    bool remove_Value(int id);
+    bool remove_HT(int id);
 };
+
 
 // Constructor
 template<class Value>
-HashTable<Value>::HashTable(int size, int sizing_up_down)
-        : size(size), Values_amount(0), load_factor(sizing_up_down) {
-    array = new List<Value> *[size]();
+HashTable<Value>::HashTable(int size)
+        : size(size), Values_amount(0), load_factor(2) {
+    array = new List<Value>[size]();
 }
 
 // Dtor
@@ -148,27 +156,12 @@ HashTable<Value>::~HashTable() {
 }
 
 template<class Value>
-Value HashTable<Value>::findAndReturn(int key) {
-    if (array[key % size]->find(key) == nullptr) {
+Node<Value> *HashTable<Value>::find_HT(int key) {
+    if (array[key % size].find(key) == nullptr) {
         return nullptr;
     } else {
-        return array[key % size]->find(key)->value;
+        return array[key % size].find(key);
     }
-}
-
-template<class Value>
-int HashTable<Value>::getSize() const {
-    return size;
-}
-
-template<class Value>
-int HashTable<Value>::getCapacity() const {
-    return Values_amount;
-}
-
-template<class Value>
-bool HashTable<Value>::isEmpty() const {
-    return size == 0;
 }
 
 template<class Value>
@@ -189,19 +182,9 @@ const Node<Value> *HashTable<Value>::operator[](int place) const {
 
 template<class Value>
 void HashTable<Value>::clear() {
-    Node<Value> *current;
-    Node<Value> *next;
     for (int i = 0; i < size; i++) {
-        if (array[i] != nullptr) {
-            current = array[i]->head;
-            while (current != nullptr) {
-                next = current->next;
-                if (current->value != nullptr) {
-                    current->value = nullptr;
-                }
-                current = next;
-            }
-            delete array[i];
+        if (array[i].head != nullptr) {
+            array[i].deleteList();
         }
     }
     delete[] array;
@@ -217,18 +200,18 @@ void HashTable<Value>::resize(int to_change) {
 }
 
 template<class Value>
-bool HashTable<Value>::insert_Value(int id, Value value) {
+bool HashTable<Value>::insert_HT(int id, Value value) {
+    if (this->find_HT(id) != nullptr) {
+        return false;
+    }
     if ((this->load_factor * this->size) < this->Values_amount) {
         Node<Value> *current;
-        List<Value> *bigger_array = new List<Value>[2 * size]();
+        auto bigger_array = new List<Value>[2 * size]();
         for (int i = 0; i < this->size; i++) {
-            if (array[i] != nullptr) {
-                current = array[i]->head;
+            if (array[i].head != nullptr) {
+                current = array[i].head;
                 while (current != nullptr) {
-                    if (bigger_array[current->id % (2 * this->size)] == nullptr) {
-                        bigger_array[current->id % (2 * this->size)] = new List<Value>();
-                    }
-                    bigger_array[current->id % (2 * this->size)]->addToList(new Value(current->value), current->id);
+                    bigger_array[current->id % (2 * this->size)].addToList(current->value, current->id);
                     current = current->next;
                 }
             }
@@ -237,30 +220,25 @@ bool HashTable<Value>::insert_Value(int id, Value value) {
         array = bigger_array;
         this->resize(1);
     }
-    if (this->findAndReturn(id) != nullptr) {
-        return false;
-    }
-    if (array[id % this->size] == nullptr) {
-        array[id % this->size] = new List<Value>();
-    }
-    array[id % this->size]->addToList(value, id);
+    array[id % this->size].addToList(value, id);
     this->Values_amount++;
     return true;
 }
 
+
 template<class Value>
-bool HashTable<Value>::remove_Value(int id) {
+bool HashTable<Value>::remove_HT(int id) {
+    if (this->find_HT(id) == nullptr) {
+        return false;
+    }
     if ((this->load_factor * this->Values_amount) < this->size) {
         Node<Value> *current;
-        List<Value> *smaller_array = new List<Value>[this->size / 2]();
+        auto smaller_array = new List<Value>[this->size / 2]();
         for (int i = 0; i < this->size; i++) {
-            if (array[i] != nullptr) {
-                current = array[i]->head;
+            if (array[i].head != nullptr) {
+                current = array[i].head;
                 while (current != nullptr) {
-                    if (smaller_array[current->id % (this->size / 2)] == nullptr) {
-                        smaller_array[current->id % (this->size / 2)] = new List<Value>();
-                    }
-                    smaller_array[current->id % (this->size / 2)]->addToList(new Value(current->value), current->id);
+                    smaller_array[current->id % (this->size / 2)].addToList(current->value, current->id);
                     current = current->next;
                 }
             }
@@ -269,7 +247,7 @@ bool HashTable<Value>::remove_Value(int id) {
         array = smaller_array;
         this->resize(2);
     }
-    array[id % this->size]->deleteValue(id);
+    array[id % this->size].deleteValue(id);
     this->Values_amount--;
     return true;
 }

@@ -1,7 +1,9 @@
 #ifndef _UNION_FIND_H_
 #define _UNION_FIND_H_
-
-
+#include "RankTree.h"
+#include "HashTable.h"
+#include "Player.h"
+#include "Team.h"
 
 class UnionFind
 {
