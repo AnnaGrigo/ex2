@@ -8,71 +8,76 @@
 #include "RankTree.h"
 #include "HashTable.h"
 #include "wet2util.h"
+#include "Player.h"
+#include "Team.h"
 
-template<class Group,class Item>
 class UFNode {
 public:
     int id;
     int size;
-    permutation_t rSpirit;
+    permutation_t rS;
     permutation_t spirit;
-    Item item;
-    Group group;
+    Player *player;
+    Team *team;
     UFNode *parent;
 
-    UFNode(int id, Item item) : id(id),size(1),rSpirit(0),item(item),group(nullptr),parent(nullptr) {}
+    UFNode(int id, Player *player) : id(id), size(1), rS(permutation_t::neutral()), player(player), team(nullptr),
+                                     parent(nullptr) {}
 };
 
 
-template<class Group,class Item>
 class UnionFind {
 public:
-    Group* Find(int id);
-    StatusType Union(Group group1, Group group2);
+    HashTable<Player *> *Players;
+    RankTree<int, Team *> *Teams;
+
     UnionFind() = default;
+
+    UnionFind(HashTable<Player *> *Players, RankTree<int, Team *> *Teams) : Players(Players), Teams(Teams) {}
+
+    Team *Find(int id);
+
+    StatusType Union(Team *BuyerTeam, Team *BoughtTeam);
+
     ~UnionFind() = default;
-private:
-    HashTable<Item> *items;
-    RankTree<int,Group> *groups;
+
 };
 
-template<class Group, class Item>
-Group *UnionFind<Group, Item>::Find(int id) {
-    Item item = items->findAndReturn(id);
-    if(item == nullptr){
+Team *UnionFind::Find(int id) {
+    Player *Player = Players->find_HT(id)->value;
+    if (Player == nullptr) {
         return nullptr;
     }
-    UFNode<Group,Item> *node = item->node;
-    while(node->parent != nullptr){
+    UFNode *node = Player->my_UFNode;
+    while (node->parent != nullptr) {
         node = node->parent;
     }
-    return node->group;
+    return node->team;
 }
 
 
-//group1 buys group2 -> group1 will be "on top" of group2 (because the players have been in the group longer)
-template<class Group, class Item>
-StatusType UnionFind<Group, Item>::Union(Group group1, Group group2) {
-    UFNode<Group, Item> *node1 = group1->node;
-    UFNode<Group, Item> *node2 = group2->node;
-    if(node2->size >= node1->size){
-        node1->parent = node2;
-        node2->size += node1->size;
-        node1->group = node2->group;
+//Team1 buys Team2 -> Team1 will be "on top" of Team2 (because the players have been in the Team longer)
+StatusType UnionFind::Union(Team *BuyerTeam, Team *BoughtTeam) {
+    UFNode *Buyer = BuyerTeam->team_UFNode;
+    UFNode *Bought = BoughtTeam->team_UFNode;
+    //update pointers
+    if (Bought->size >= Buyer->size) {
+        Buyer->parent = Bought;
+        Bought->size += Buyer->size;
+        Buyer->team = Bought->team;
+    } else {
+        Bought->parent = Buyer;
+        Buyer->size += Bought->size;
+        Bought->team = Buyer->team;
     }
-    else{
-        node2->parent = node1;
-        node1->size += node2->size;
-        node2->group = node1->group;
+    //update spirit
+    BuyerTeam->team_permutation = BuyerTeam->team_permutation * BoughtTeam->team_permutation;
+    if (Buyer->size >= Bought->size) {
+
     }
-
-
-
-
 
     return StatusType::ALLOCATION_ERROR;
 }
-
 
 
 #endif //EX2_UNIONFIND_H

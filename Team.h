@@ -4,6 +4,7 @@
 #include "wet2util.h"
 
 class Player;
+class UFNode;
 
 class Team {
 public:
@@ -15,6 +16,7 @@ public:
     bool is_active;
     Player *UF_player;
     permutation_t team_permutation;
+    UFNode *team_UFNode;
 
 
 

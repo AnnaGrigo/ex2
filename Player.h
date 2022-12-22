@@ -3,6 +3,9 @@
 #define RATUV1_PLAYER_H
 #include "Team.h"
 #include "wet2util.h"
+#include "UnionFind.h"
+
+class UFNode;
 
 class Player
 {
@@ -15,6 +18,7 @@ public:
     int cards;
     bool is_goalkeeper;
     int games_team_played; //games played by the team when initialized
+    UFNode *my_UFNode;
 
     Player() = default;
     Player(int player_id, int team_id,const permutation_t &spirit , int games_played,
