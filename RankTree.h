@@ -260,7 +260,7 @@ StatusType RankTree<Key, Value>::insert(Key key, Value value) {
 
 template<class Key, class Value>
 RankNode<Key, Value> *RankTree<Key, Value>::findIndex(int index) {
-    return findIndex(root, index + 1);
+    return findIndexAux(root, index + 1);
 
 }
 
