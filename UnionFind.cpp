@@ -2,11 +2,8 @@
 #include "UnionFind.h"
 
 Team *UnionFind::Find(int id) {
-    Player *Player = Players->find_HT(id)->value;
-    if (Player == nullptr) {
-        return nullptr;
-    }
-    UFNode *node = Player->my_UFNode;
+    Player Player = Players->find_HT(id)->value;
+    UFNode *node = Player.my_UFNode;
     while (node->parent != nullptr) {
         node = node->parent;
     }

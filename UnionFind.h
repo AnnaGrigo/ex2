@@ -33,12 +33,12 @@ public:
 
 class UnionFind {
 public:
-    HashTable<Player *> *Players;
-    RankTree<int, Team *> *Teams;
+    HashTable<Player> *Players;
+    RankTree<int, Team*> *Teams;
 
     UnionFind() = default;
 
-    UnionFind(HashTable<Player *> *Players, RankTree<int, Team *> *Teams) : Players(Players), Teams(Teams) {}
+    UnionFind(HashTable<Player> *Players, RankTree<int, Team*> *Teams) : Players(Players), Teams(Teams) {}
 
     Team *Find(int id);
 

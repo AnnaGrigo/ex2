@@ -20,13 +20,17 @@
 #include "HashTable.h"
 #include "Player.h"
 #include "Team.h"
-
+#include "Ability.h"
+#include "UnionFind.h"
 
 class world_cup_t {
 private:
 	RankTree<int, Team*> teams_by_id;
-    RankTree<int, Team*> teams_by_ability;
-    HashTable<Player*> all_players_by_id;
+    RankTree<Ability, Team*> teams_by_ability;
+    RankTree<int, Team*> teams_to_delete;
+    HashTable<Player> all_players_by_id;
+    UnionFind UF;
+    int counter_to_delete;
 	
 public:
 	// <DO-NOT-MODIFY> {

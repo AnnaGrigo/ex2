@@ -14,7 +14,6 @@ public:
     bool is_there_goalkeeper;
     int all_team_games_played;
     bool is_active;
-    Player *UF_player;
     permutation_t team_permutation;
     UFNode *team_UFNode;
 

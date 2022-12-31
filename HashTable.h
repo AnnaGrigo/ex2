@@ -122,7 +122,7 @@ public:
     int load_factor;
     List<Value> *array;
 
-    explicit HashTable(int size);
+    explicit HashTable();
 
     ~HashTable();
 
@@ -144,8 +144,8 @@ public:
 
 // Constructor
 template<class Value>
-HashTable<Value>::HashTable(int size)
-        : size(size), Values_amount(0), load_factor(2) {
+HashTable<Value>::HashTable()
+        : size(10), Values_amount(0), load_factor(2) {
     array = new List<Value>[size]();
 }
 
