@@ -8,7 +8,6 @@ Team::Team(int team_id) {
     this->is_there_goalkeeper = false;
     this->all_team_games_played = 0;
     this->is_active = true;
-    this->UF_player = nullptr;
     this->team_permutation = permutation_t::neutral();
 }
 

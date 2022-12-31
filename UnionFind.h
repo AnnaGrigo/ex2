@@ -25,7 +25,7 @@ public:
     UFNode *parent; //if nullptr -> root
 
 
-    UFNode(int id, Player *player) : size(0), rS(permutation_t::neutral()), player(player), team(nullptr),
+    UFNode(Player *player) : size(0), rS(permutation_t::neutral()), player(player), team(nullptr),
                                     temp_plays(0) ,parent(nullptr) {
     }
 };

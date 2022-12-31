@@ -13,6 +13,7 @@ public:
     int player_id;
     int team_id;
     permutation_t my_spirit;
+    permutation_t org_team_spirit_join;
     int own_games_played; //games played by this player when initialized
     int ability;
     int cards;

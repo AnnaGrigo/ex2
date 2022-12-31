@@ -10,6 +10,18 @@ world_cup_t::world_cup_t()
     counter_to_delete = 1;
 }
 
+template<class Key, class Value>
+void Delete_All(RankNode<Key, Value> *root)
+{
+    if (!root)
+    {
+        return;
+    }
+    Delete_All(root->left_son);
+    Delete_All(root->right_son);
+    delete root->value;
+}
+
 world_cup_t::~world_cup_t()
 {
     Delete_All(teams_by_id.root);

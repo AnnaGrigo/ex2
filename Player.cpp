@@ -7,6 +7,7 @@ Player::Player(int player_id, int team_id, const permutation_t &spirit, int game
     this->team_id = team_id;
     this->my_spirit = spirit;
     this->own_games_played = games_played;
+    this->org_team_spirit_join = permutation_t::neutral();
     this->ability = ability;
     this->cards = cards;
     this->is_goalkeeper = is_goalkeeper;
