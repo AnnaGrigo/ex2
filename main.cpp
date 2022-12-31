@@ -5,7 +5,7 @@
 using std::cout;
 using std::endl;
 
-int main() {
+//int main() {
 
     HashTable<int> table(3);
     table.insert_HT(1, 1);

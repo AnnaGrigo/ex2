@@ -9,7 +9,7 @@ Team::Team(int team_id) {
     this->all_team_games_played = 0;
     this->is_active = true;
     this->UF_player = nullptr;
-    this->team_permutation = permutation_t(); // needs to be checked
+    this->team_permutation = permutation_t::neutral();
 }
 
 bool Is_Team_Legal(Team *team) {

@@ -13,16 +13,21 @@
 
 class UFNode {
 public:
-    int id;
     int size;
     permutation_t rS;
+    int temp_plays; //if the buyer team is larger, assign to temp_plays of the bought team the minus all_games_played by the buyer team
+    //if the buyer team is smaller, assign to temp_plays of the buyer team all the all_games_played of the buyer team
+    //minus all_games_played of the bought team, and assign to temp_plays of the bought team all_games_played of the bought team
+    //minus all_games_played of the buyer team
     permutation_t spirit;
     Player *player;
-    Team *team;
-    UFNode *parent;
+    Team *team; //only for root
+    UFNode *parent; //if nullptr -> root
 
-    UFNode(int id, Player *player) : id(id), size(1), rS(permutation_t::neutral()), player(player), team(nullptr),
-                                     parent(nullptr) {}
+
+    UFNode(int id, Player *player) : size(0), rS(permutation_t::neutral()), player(player), team(nullptr),
+                                    temp_plays(0) ,parent(nullptr) {
+    }
 };
 
 
@@ -37,47 +42,14 @@ public:
 
     Team *Find(int id);
 
-    StatusType Union(Team *BuyerTeam, Team *BoughtTeam);
+    StatusType Union_Teams(Team *BuyerTeam, Team *BoughtTeam);
+
+    StatusType Union_Players(UFNode *team, UFNode *player);
 
     ~UnionFind() = default;
 
 };
 
-Team *UnionFind::Find(int id) {
-    Player *Player = Players->find_HT(id)->value;
-    if (Player == nullptr) {
-        return nullptr;
-    }
-    UFNode *node = Player->my_UFNode;
-    while (node->parent != nullptr) {
-        node = node->parent;
-    }
-    return node->team;
-}
-
-
-//Team1 buys Team2 -> Team1 will be "on top" of Team2 (because the players have been in the Team longer)
-StatusType UnionFind::Union(Team *BuyerTeam, Team *BoughtTeam) {
-    UFNode *Buyer = BuyerTeam->team_UFNode;
-    UFNode *Bought = BoughtTeam->team_UFNode;
-    //update pointers
-    if (Bought->size >= Buyer->size) {
-        Buyer->parent = Bought;
-        Bought->size += Buyer->size;
-        Buyer->team = Bought->team;
-    } else {
-        Bought->parent = Buyer;
-        Buyer->size += Bought->size;
-        Bought->team = Buyer->team;
-    }
-    //update spirit
-    BuyerTeam->team_permutation = BuyerTeam->team_permutation * BoughtTeam->team_permutation;
-    if (Buyer->size >= Bought->size) {
-
-    }
-
-    return StatusType::ALLOCATION_ERROR;
-}
 
 
 #endif //EX2_UNIONFIND_H

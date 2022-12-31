@@ -13,7 +13,7 @@ public:
     RankNode *left_son;
     RankNode *parent;
     int weight;
-    int height{};
+    int height;
 
     RankNode(Key key, Value value)
             : key(key),
@@ -500,7 +500,7 @@ RankNode<Key, Value> *findNode(RankNode<Key, Value> *rootNode, Key key) {
     }
 }
 
-
+/*
 template<class Key, class Value>
 bool is_tree_valid(RankNode<Key, Value> *root) {
     if (!root) {
@@ -582,5 +582,5 @@ int getWeight(RankNode<Key, Value> *root) {
     }
     return root->weight;
 }
-
+*/
 #endif //RATUV1_RankTree_H
