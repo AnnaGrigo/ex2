@@ -1,14 +1,8 @@
 #include "worldcup23a2.h"
 
-world_cup_t::world_cup_t()
-{
-    UF = UnionFind(&all_players_by_id);
-    teams_by_id = RankTree<int, Team*>();
-    teams_by_ability = RankTree<Ability, Team*>();
-    teams_to_delete = RankTree<int, Team*>();
-    all_players_by_id = HashTable<Player>();
-    counter_to_delete = 1;
-}
+world_cup_t::world_cup_t() : teams_by_id(), teams_by_ability(), teams_to_delete(),
+    all_players_by_id(), UF(), counter_to_delete(1) {}
+
 
 template<class Key, class Value>
 void Delete_All(RankNode<Key, Value> *root)

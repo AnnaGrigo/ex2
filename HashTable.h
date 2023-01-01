@@ -39,9 +39,7 @@ class List {
 public:
     Node<Value> *head;
 
-    List()
-            : head(nullptr) {
-    }
+    List(): head(nullptr) {}
 
     // Adding a Value to the list
     void addToList(Value value, int id);
@@ -87,7 +85,7 @@ bool List<Value>::deleteValue(int id) {
 
 template<class Value>
 Node<Value> *List<Value>::find(int id) {
-    if (this == nullptr) {
+    if (this->head == nullptr) {
         return nullptr;
     }
     Node<Value> *current = this->head;

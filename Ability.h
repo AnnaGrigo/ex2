@@ -32,6 +32,7 @@ public:
                 return true;
             }
         }
+        return false;
     }
 
     friend bool operator>(const Ability& Ability1, const Ability& Ability2)
@@ -47,6 +48,7 @@ public:
                 return true;
             }
         }
+        return false;
     }
 
     friend bool operator==(const Ability& Ability1, const Ability& Ability2)
@@ -58,6 +60,7 @@ public:
                 return true;
             }
         }
+        return false;
     }
 
     friend bool operator<=(const Ability& Ability1, const Ability& Ability2)
