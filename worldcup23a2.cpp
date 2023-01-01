@@ -117,7 +117,10 @@ StatusType world_cup_t::add_player(int playerId, int teamId,
     }
     team->team_permutation = team->team_permutation * spirit;
     all_players_by_id.find_HT(playerId)->value.org_team_spirit_join = team->team_permutation;
-    team->is_there_goalkeeper = true;
+    if(goalKeeper)
+    {
+        team->is_there_goalkeeper = true;
+    }
     teams_by_ability.remove(Ability(team->team_ability,teamId));
     team->team_ability += ability;
     return teams_by_ability.insert(Ability(team->team_ability,teamId), team);
@@ -256,6 +259,8 @@ output_t<permutation_t> world_cup_t::get_partial_spirit(int playerId)
     UFNode* player_UFNode = player_node->value.my_UFNode;
     if(player_UFNode == nullptr)
         return StatusType::FAILURE;
+    if(!UF.Find(playerId)->is_active)
+        return StatusType::FAILURE;
     permutation_t spirit = player_node->value.org_team_spirit_join;
     while (player_UFNode->parent != nullptr)
     {
@@ -271,10 +276,10 @@ StatusType world_cup_t::buy_team(int teamId1, int teamId2)
 {
     if(teamId1 <= 0 || teamId2 <= 0 || teamId1 == teamId2)
         return StatusType::INVALID_INPUT;
+    if(teams_by_id.find(teamId1) == nullptr || teams_by_id.find(teamId2) == nullptr)
+        return StatusType::FAILURE;
     Team *team1 = teams_by_id.find(teamId1)->value;
     Team *team2 = teams_by_id.find(teamId2)->value;
-    if(team1 == nullptr || team2 == nullptr)
-        return StatusType::FAILURE;
     //if team1 (buyer) is empty
     if(team2->team_UFNode && !team1->team_UFNode){
         team1->team_UFNode = team2->team_UFNode;
