@@ -1,7 +1,7 @@
 #include "worldcup23a2.h"
 
 world_cup_t::world_cup_t() : teams_by_id(), teams_by_ability(), teams_to_delete(),
-    all_players_by_id(), UF(), counter_to_delete(1) {}
+    all_players_by_id(), UF(&all_players_by_id), counter_to_delete(1) {}
 
 
 template<class Key, class Value>
@@ -124,11 +124,13 @@ output_t<int> world_cup_t::play_match(int teamId1, int teamId2)
         team1->points += 3;
         team1->all_team_games_played++;
         team2->all_team_games_played++;
+        return output_t<int>(1);
     }
     else if(team1->points + team1->team_ability < team2->points + team2->team_ability){
         team2->points += 3;
         team1->all_team_games_played++;
         team2->all_team_games_played++;
+        return output_t<int>(3);
     }
     else{
         permutation_t team1_spirit = team1->team_permutation;
@@ -137,20 +139,22 @@ output_t<int> world_cup_t::play_match(int teamId1, int teamId2)
             team1->points += 3;
             team1->all_team_games_played++;
             team2->all_team_games_played++;
+            return output_t<int>(2);
         }
         else if(team1_spirit.strength() < team2_spirit.strength()){
             team2->points += 3;
             team1->all_team_games_played++;
             team2->all_team_games_played++;
+            return output_t<int>(4);
         }
         else{
             team1->points++;
             team2->points++;
             team1->all_team_games_played++;
             team2->all_team_games_played++;
+            return output_t<int>(0);
         }
     }
-    return StatusType::SUCCESS;
 }
 
 
