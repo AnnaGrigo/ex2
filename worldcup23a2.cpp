@@ -211,7 +211,7 @@ StatusType world_cup_t::add_player_cards(int playerId, int cards)
     Node<Player>* player_node = all_players_by_id.find_HT(playerId);
     if(player_node == nullptr)
         return StatusType::FAILURE;
-    Team* team = UF.Find(playerId)->team_UFNode->team;
+    Team* team = UF.Find(playerId);
     if(!team->is_active)
         return StatusType::FAILURE;
     player_node->value.cards += cards;
