@@ -51,8 +51,6 @@ StatusType UnionFind::Union_Players(UFNode *team, UFNode *player) {
     team->size++;
     //update rS
     team->rS = team->rS * player->rS;
-    //update spirit
-    team->spirit = team->spirit * player->spirit;
     //update team pointer
     player->team = team->team;
     return StatusType::SUCCESS;

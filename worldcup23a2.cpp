@@ -2,7 +2,7 @@
 
 world_cup_t::world_cup_t()
 {
-    UF = UnionFind(&all_players_by_id, &teams_by_id);
+    UF = UnionFind(&all_players_by_id);
     teams_by_id = RankTree<int, Team*>();
     teams_by_ability = RankTree<Ability, Team*>();
     teams_to_delete = RankTree<int, Team*>();
@@ -86,7 +86,7 @@ StatusType world_cup_t::add_player(int playerId, int teamId,
     Team* team = teams_by_id.find(teamId)->value;
     UFNode *new_UF;
     try {
-        new_UF = new UFNode(&all_players_by_id.find_HT(playerId)->value);
+        new_UF = new UFNode(playerId);
     }
     catch (std::bad_alloc& ba)
     {
@@ -98,14 +98,17 @@ StatusType world_cup_t::add_player(int playerId, int teamId,
         all_players_by_id.find_HT(playerId)->value.my_UFNode = new_UF;
         new_UF->team = team;
         new_UF->size++;
-
     }
     else
     {
         all_players_by_id.find_HT(playerId)->value.my_UFNode = new_UF;
         UF.Union_Players(team->team_UFNode, new_UF);
     }
-    return StatusType::SUCCESS;
+    team->team_permutation = team->team_permutation * spirit;
+    team->is_there_goalkeeper = true;
+    teams_by_ability.remove(Ability(team->team_ability,teamId));
+    team->team_ability += ability;
+    return teams_by_ability.insert(Ability(team->team_ability,teamId), team);
 }
 
 output_t<int> world_cup_t::play_match(int teamId1, int teamId2)
@@ -223,8 +226,9 @@ output_t<int> world_cup_t::get_team_points(int teamId)
 
 output_t<int> world_cup_t::get_ith_pointless_ability(int i)
 {
-    // TODO: Your code goes here
-    return 12345;
+    if(i < 0 || i >= teams_by_ability.size || teams_by_ability.size == 0)
+        return StatusType::FAILURE;
+    return teams_by_ability.findIndex(i)->value->team_id;
 }
 
 output_t<permutation_t> world_cup_t::get_partial_spirit(int playerId)
@@ -249,6 +253,18 @@ output_t<permutation_t> world_cup_t::get_partial_spirit(int playerId)
 
 StatusType world_cup_t::buy_team(int teamId1, int teamId2)
 {
-    // TODO: Your code goes here
+    if(teamId1 <= 0 || teamId2 <= 0 || teamId1 == teamId2)
+        return StatusType::INVALID_INPUT;
+    Team *team1 = teams_by_id.find(teamId1)->value;
+    Team *team2 = teams_by_id.find(teamId2)->value;
+    if(team1 == nullptr || team2 == nullptr)
+        return StatusType::FAILURE;
+    UF.Union_Teams(team1,team2);
+    team1->points += team2->points;
+    teams_by_ability.remove(Ability(team1->team_ability,teamId1));
+    team1->team_ability += team2->team_ability;
+    teams_by_ability.remove(Ability(team2->team_ability,teamId2));
+    delete team2;
+    teams_by_ability.insert(Ability(team1->team_ability,teamId1),team1);
     return StatusType::SUCCESS;
 }

@@ -1,3 +1,9 @@
 # ninja log v5
-3	258	6934111230367036	CMakeFiles/ex2.dir/main.cpp.obj	712237060d031249
 259	346	6934111231202842	ex2.exe	6407156cc29f0455
+7	208	6942822501882985	CMakeFiles/ex2.dir/Team.cpp.obj	7ca21e419b528f02
+7	220	6942823531639271	CMakeFiles/ex2.dir/Player.cpp.obj	6f60a7bc33e897a2
+3	230	6942823531729253	CMakeFiles/ex2.dir/UnionFind.cpp.obj	b739b392327599f0
+9	313	6942823532557988	CMakeFiles/ex2.dir/worldcup23a2.cpp.obj	5e3cade1a0e31696
+2	234	6942827308098667	CMakeFiles/ex2.dir/Player.cpp.obj	6f60a7bc33e897a2
+5	246	6942827308209446	CMakeFiles/ex2.dir/UnionFind.cpp.obj	b739b392327599f0
+8	320	6942827308953713	CMakeFiles/ex2.dir/worldcup23a2.cpp.obj	5e3cade1a0e31696
