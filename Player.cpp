@@ -12,5 +12,6 @@ Player::Player(int player_id, int team_id, const permutation_t &spirit, int game
     this->cards = cards;
     this->is_goalkeeper = is_goalkeeper;
     this->games_team_played = 0;
+    this->my_UFNode = nullptr;
 }
 

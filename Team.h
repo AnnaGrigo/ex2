@@ -3,7 +3,6 @@
 
 #include "wet2util.h"
 
-class Player;
 class UFNode;
 
 class Team {
@@ -20,7 +19,7 @@ public:
 
 
     Team() = default;
-    Team(int team_id);
+    explicit Team(int team_id);
     ~Team() = default;
 
 };

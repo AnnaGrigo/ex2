@@ -132,5 +132,5 @@ CMakeFiles/ex2.dir/worldcup23a2.cpp.obj: \
  C:\Users\user\CLionProjects\RatuvMivne2\ex2\HashTable.h \
  C:\Users\user\CLionProjects\RatuvMivne2\ex2\Player.h \
  C:\Users\user\CLionProjects\RatuvMivne2\ex2\Team.h \
- C:\Users\user\CLionProjects\RatuvMivne2\ex2\UnionFind.h \
- C:\Users\user\CLionProjects\RatuvMivne2\ex2\Ability.h
+ C:\Users\user\CLionProjects\RatuvMivne2\ex2\Ability.h \
+ C:\Users\user\CLionProjects\RatuvMivne2\ex2\UnionFind.h

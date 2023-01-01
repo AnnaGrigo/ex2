@@ -16,11 +16,28 @@ void Delete_All(RankNode<Key, Value> *root)
     delete root->value;
 }
 
+void Delete_UF(UnionFind *UF)
+{
+    for (int i = 0; i < UF->Players->size; i++)
+    {
+        if (UF->Players->array[i].head != nullptr)
+        {
+            Node<Player> *current = UF->Players->array[i].head;
+            Node<Player> *next;
+            while (current != nullptr) {
+                next = current->next;
+                delete current->value.my_UFNode;
+                current = next;
+            }
+        }
+    }
+}
+
 world_cup_t::~world_cup_t()
 {
     Delete_All(teams_by_id.root);
     Delete_All(teams_to_delete.root);
-    //needs to add a distractor to UF
+    Delete_UF(&UF);
 }
 
 StatusType world_cup_t::add_team(int teamId)
@@ -99,6 +116,7 @@ StatusType world_cup_t::add_player(int playerId, int teamId,
         UF.Union_Players(team->team_UFNode, new_UF);
     }
     team->team_permutation = team->team_permutation * spirit;
+    all_players_by_id.find_HT(playerId)->value.org_team_spirit_join = team->team_permutation;
     team->is_there_goalkeeper = true;
     teams_by_ability.remove(Ability(team->team_ability,teamId));
     team->team_ability += ability;
@@ -193,8 +211,7 @@ StatusType world_cup_t::add_player_cards(int playerId, int cards)
     Team* team = UF.Find(playerId)->team_UFNode->team;
     if(!team->is_active)
         return StatusType::FAILURE;
-    Player player = player_node->value;
-    player.cards += cards;
+    player_node->value.cards += cards;
     return StatusType::SUCCESS;
 }
 
@@ -249,6 +266,7 @@ output_t<permutation_t> world_cup_t::get_partial_spirit(int playerId)
     return spirit;
 }
 
+//team1 buys team2
 StatusType world_cup_t::buy_team(int teamId1, int teamId2)
 {
     if(teamId1 <= 0 || teamId2 <= 0 || teamId1 == teamId2)
@@ -257,10 +275,24 @@ StatusType world_cup_t::buy_team(int teamId1, int teamId2)
     Team *team2 = teams_by_id.find(teamId2)->value;
     if(team1 == nullptr || team2 == nullptr)
         return StatusType::FAILURE;
-    UF.Union_Teams(team1,team2);
+    //if team1 (buyer) is empty
+    if(team2->team_UFNode && !team1->team_UFNode){
+        team1->team_UFNode = team2->team_UFNode;
+        team1->team_UFNode->team = team1;
+        team1->team_UFNode->temp_plays -= team2->all_team_games_played - team1->all_team_games_played;
+    }
+        //if both teams are not empty
+    else if (team1->team_UFNode && team2->team_UFNode){
+        UF.Union_Teams(team1,team2);
+    }
+    if(team2->is_there_goalkeeper){
+        team1->is_there_goalkeeper = true;
+    }
     team1->points += team2->points;
+    team1->team_permutation =  team1->team_permutation * team2->team_permutation;
     teams_by_ability.remove(Ability(team1->team_ability,teamId1));
     team1->team_ability += team2->team_ability;
+    teams_by_id.remove(teamId2);
     teams_by_ability.remove(Ability(team2->team_ability,teamId2));
     delete team2;
     teams_by_ability.insert(Ability(team1->team_ability,teamId1),team1);

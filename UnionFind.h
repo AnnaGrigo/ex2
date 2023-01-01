@@ -1,6 +1,3 @@
-//
-// Created by annag on 21/12/2022.
-//
 
 #ifndef EX2_UNIONFIND_H
 #define EX2_UNIONFIND_H
@@ -9,7 +6,8 @@
 #include "HashTable.h"
 #include "wet2util.h"
 #include "Player.h"
-#include "Team.h"
+
+class Team;
 
 class UFNode {
 public:
@@ -24,7 +22,7 @@ public:
     UFNode *parent; //if nullptr -> root
 
 
-    UFNode(int id) : id(id) ,size(0), rS(permutation_t::neutral()),  team(nullptr), temp_plays(0) ,parent(nullptr) {}
+    explicit UFNode(int id) : id(id) ,size(0), rS(permutation_t::neutral()),  temp_plays(0) ,team(nullptr), parent(nullptr) {}
 };
 
 
@@ -34,7 +32,7 @@ public:
 
     UnionFind() = default;
 
-    UnionFind(HashTable<Player> *Players) : Players(Players) {}
+    explicit UnionFind(HashTable<Player> *Players) : Players(Players) {}
 
     Team *Find(int id);
 

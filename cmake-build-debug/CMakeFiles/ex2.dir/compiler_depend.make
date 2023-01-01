@@ -127,13 +127,7 @@ CMakeFiles/ex2.dir/Player.cpp.obj: C:/Users/user/CLionProjects/RatuvMivne2/ex2/P
   C:/Program\ Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32/bits/ctype_inline.h \
   C:/Program\ Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/locale_facets.tcc \
   C:/Program\ Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/basic_ios.tcc \
-  C:/Program\ Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/ostream.tcc \
-  C:/Users/user/CLionProjects/RatuvMivne2/ex2/UnionFind.h \
-  C:/Users/user/CLionProjects/RatuvMivne2/ex2/RankTree.h \
-  C:/Program\ Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/iostream \
-  C:/Program\ Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/istream \
-  C:/Program\ Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/istream.tcc \
-  C:/Users/user/CLionProjects/RatuvMivne2/ex2/HashTable.h
+  C:/Program\ Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/ostream.tcc
 
 CMakeFiles/ex2.dir/Team.cpp.obj: C:/Users/user/CLionProjects/RatuvMivne2/ex2/Team.cpp \
   C:/Users/user/CLionProjects/RatuvMivne2/ex2/Team.h \
@@ -529,8 +523,8 @@ CMakeFiles/ex2.dir/main23a2.cpp.obj: C:/Users/user/CLionProjects/RatuvMivne2/ex2
   C:/Users/user/CLionProjects/RatuvMivne2/ex2/HashTable.h \
   C:/Users/user/CLionProjects/RatuvMivne2/ex2/Player.h \
   C:/Users/user/CLionProjects/RatuvMivne2/ex2/Team.h \
-  C:/Users/user/CLionProjects/RatuvMivne2/ex2/UnionFind.h \
-  C:/Users/user/CLionProjects/RatuvMivne2/ex2/Ability.h
+  C:/Users/user/CLionProjects/RatuvMivne2/ex2/Ability.h \
+  C:/Users/user/CLionProjects/RatuvMivne2/ex2/UnionFind.h
 
 CMakeFiles/ex2.dir/worldcup23a2.cpp.obj: C:/Users/user/CLionProjects/RatuvMivne2/ex2/worldcup23a2.cpp \
   C:/Users/user/CLionProjects/RatuvMivne2/ex2/worldcup23a2.h \
@@ -665,8 +659,8 @@ CMakeFiles/ex2.dir/worldcup23a2.cpp.obj: C:/Users/user/CLionProjects/RatuvMivne2
   C:/Users/user/CLionProjects/RatuvMivne2/ex2/HashTable.h \
   C:/Users/user/CLionProjects/RatuvMivne2/ex2/Player.h \
   C:/Users/user/CLionProjects/RatuvMivne2/ex2/Team.h \
-  C:/Users/user/CLionProjects/RatuvMivne2/ex2/UnionFind.h \
-  C:/Users/user/CLionProjects/RatuvMivne2/ex2/Ability.h
+  C:/Users/user/CLionProjects/RatuvMivne2/ex2/Ability.h \
+  C:/Users/user/CLionProjects/RatuvMivne2/ex2/UnionFind.h
 
 
 C:/Users/user/CLionProjects/RatuvMivne2/ex2/main23a2.cpp:
@@ -929,6 +923,8 @@ C:/Program\ Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x8
 
 C:/Program\ Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/ostream.tcc:
 
+C:/Users/user/CLionProjects/RatuvMivne2/ex2/UnionFind.cpp:
+
 C:/Users/user/CLionProjects/RatuvMivne2/ex2/UnionFind.h:
 
 C:/Users/user/CLionProjects/RatuvMivne2/ex2/RankTree.h:
@@ -938,8 +934,6 @@ C:/Program\ Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x8
 C:/Program\ Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/istream.tcc:
 
 C:/Users/user/CLionProjects/RatuvMivne2/ex2/HashTable.h:
-
-C:/Users/user/CLionProjects/RatuvMivne2/ex2/UnionFind.cpp:
 
 C:/Users/user/CLionProjects/RatuvMivne2/ex2/worldcup23a2.h:
 
