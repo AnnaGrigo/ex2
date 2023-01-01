@@ -154,7 +154,7 @@ void print2D(RankNode<int,int> *root)
     std::cout<<std::endl;
     std::cout<<std::endl;
 }
-int main(){
+int main2(){
     RankTree<int,int> tree;
     std::vector<int> vector;
     int size = 0;
