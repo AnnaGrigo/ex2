@@ -660,7 +660,8 @@ CMakeFiles/ex2.dir/worldcup23a2.cpp.obj: C:/Users/user/CLionProjects/RatuvMivne2
   C:/Users/user/CLionProjects/RatuvMivne2/ex2/Player.h \
   C:/Users/user/CLionProjects/RatuvMivne2/ex2/Team.h \
   C:/Users/user/CLionProjects/RatuvMivne2/ex2/Ability.h \
-  C:/Users/user/CLionProjects/RatuvMivne2/ex2/UnionFind.h
+  C:/Users/user/CLionProjects/RatuvMivne2/ex2/UnionFind.h \
+  C:/Program\ Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/assert.h
 
 
 C:/Users/user/CLionProjects/RatuvMivne2/ex2/main23a2.cpp:
@@ -940,3 +941,5 @@ C:/Users/user/CLionProjects/RatuvMivne2/ex2/worldcup23a2.h:
 C:/Users/user/CLionProjects/RatuvMivne2/ex2/Ability.h:
 
 C:/Users/user/CLionProjects/RatuvMivne2/ex2/worldcup23a2.cpp:
+
+C:/Program\ Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/assert.h:

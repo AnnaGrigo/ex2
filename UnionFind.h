@@ -11,7 +11,7 @@ class Team;
 
 class UFNode {
 public:
-    int id;
+    int id; //player id
     int size;
     permutation_t rS;
     int temp_plays; //if the buyer team is larger, assign to temp_plays of the bought team the minus all_games_played by the buyer team

@@ -1,4 +1,5 @@
 #include "worldcup23a2.h"
+#include <assert.h>
 
 world_cup_t::world_cup_t() : teams_by_id(), teams_by_ability(), teams_to_delete(),
     all_players_by_id(), UF(&all_players_by_id), counter_to_delete(1) {}
@@ -74,7 +75,8 @@ StatusType world_cup_t::remove_team(int teamId)
     Team* team_to_remove = teams_by_id.find(teamId)->value;
     team_to_remove->is_active = false;
     teams_by_id.remove(teamId);
-    teams_by_ability.remove(Ability(team_to_remove->team_ability,teamId));
+    if(teams_by_ability.remove(Ability(team_to_remove->team_ability,teamId)) == StatusType::FAILURE)
+        return StatusType::FAILURE;
     teams_to_delete.insert(counter_to_delete, team_to_remove);
     counter_to_delete++;
     return StatusType::SUCCESS;

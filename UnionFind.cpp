@@ -37,7 +37,10 @@ StatusType UnionFind::Union_Teams(Team *BuyerTeam, Team *BoughtTeam) {
         Bought->rS =  BuyerTeam->team_permutation * Bought->rS;
         Buyer->rS =  Buyer->rS * (Bought->rS.inv());
         //update team pointer
-        Buyer->team = Bought->team;
+        Bought->team = Buyer->team;
+        Buyer->team = nullptr;
+        //update head of teams
+        BuyerTeam->team_UFNode = Bought;
     }
     return StatusType::SUCCESS;
 }
