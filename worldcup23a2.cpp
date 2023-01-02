@@ -143,16 +143,14 @@ output_t<int> world_cup_t::play_match(int teamId1, int teamId2)
     if(!(Is_Team_Legal(team1) && Is_Team_Legal(team2)))
         return StatusType::FAILURE;
 
+    team1->all_team_games_played++;
+    team2->all_team_games_played++;
     if(team1->points + team1->team_ability > team2->points + team2->team_ability){
         team1->points += 3;
-        team1->all_team_games_played++;
-        team2->all_team_games_played++;
         return output_t<int>(1);
     }
     else if(team1->points + team1->team_ability < team2->points + team2->team_ability){
         team2->points += 3;
-        team1->all_team_games_played++;
-        team2->all_team_games_played++;
         return output_t<int>(3);
     }
     else{
@@ -160,21 +158,15 @@ output_t<int> world_cup_t::play_match(int teamId1, int teamId2)
         permutation_t team2_spirit = team2->team_permutation;
         if(team1_spirit.strength() > team2_spirit.strength()){
             team1->points += 3;
-            team1->all_team_games_played++;
-            team2->all_team_games_played++;
             return output_t<int>(2);
         }
         else if(team1_spirit.strength() < team2_spirit.strength()){
             team2->points += 3;
-            team1->all_team_games_played++;
-            team2->all_team_games_played++;
             return output_t<int>(4);
         }
         else{
             team1->points++;
             team2->points++;
-            team1->all_team_games_played++;
-            team2->all_team_games_played++;
             return output_t<int>(0);
         }
     }

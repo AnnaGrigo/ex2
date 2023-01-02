@@ -20,7 +20,7 @@ StatusType UnionFind::Union_Teams(Team *BuyerTeam, Team *BoughtTeam) {
         Bought->parent = Buyer;
         Buyer->size += Bought->size;
         //update temp_plays
-        Bought->temp_plays += BoughtTeam->all_team_games_played - BuyerTeam->all_team_games_played;
+        Bought->temp_plays += BoughtTeam->all_team_games_played - BuyerTeam->all_team_games_played - Buyer->temp_plays;
         //update rS
         Bought->rS =  (Buyer->rS.inv()) * BuyerTeam->team_permutation * Bought->rS;
         //update team pointer
@@ -31,7 +31,7 @@ StatusType UnionFind::Union_Teams(Team *BuyerTeam, Team *BoughtTeam) {
         Buyer->parent = Bought;
         Bought->size += Buyer->size;
         //update temp_plays
-        Buyer->temp_plays += BuyerTeam->all_team_games_played - BoughtTeam->all_team_games_played;
+        Buyer->temp_plays += BuyerTeam->all_team_games_played - BoughtTeam->all_team_games_played - Bought->temp_plays;
         Bought->temp_plays += BoughtTeam->all_team_games_played - BuyerTeam->all_team_games_played;
         //update rS
         Bought->rS =  BuyerTeam->team_permutation * Bought->rS;
