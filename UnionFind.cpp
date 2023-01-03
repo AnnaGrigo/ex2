@@ -20,7 +20,7 @@ StatusType UnionFind::Union_Teams(Team *BuyerTeam, Team *BoughtTeam) {
         Bought->parent = Buyer;
         Buyer->size += Bought->size;
         //update temp_plays
-        Bought->temp_plays += BoughtTeam->all_team_games_played - BuyerTeam->all_team_games_played - Buyer->temp_plays;
+        Bought->temp_plays += BoughtTeam->all_team_games_played - BuyerTeam->all_team_games_played -Buyer->temp_plays;
         //update rS
         Bought->rS =  (Buyer->rS.inv()) * BuyerTeam->team_permutation * Bought->rS;
         //update team pointer

@@ -119,6 +119,7 @@ StatusType world_cup_t::add_player(int playerId, int teamId,
     }
     team->team_permutation = team->team_permutation * spirit;
     all_players_by_id.find_HT(playerId)->value.org_team_spirit_join = team->team_permutation;
+    all_players_by_id.find_HT(playerId)->value.games_team_played = team->all_team_games_played + team->team_UFNode->temp_plays;
     if(goalKeeper)
     {
         team->is_there_goalkeeper = true;
@@ -278,7 +279,7 @@ StatusType world_cup_t::buy_team(int teamId1, int teamId2)
     if(team2->team_UFNode && !team1->team_UFNode){
         team1->team_UFNode = team2->team_UFNode;
         team1->team_UFNode->team = team1;
-        team1->team_UFNode->temp_plays -= team2->all_team_games_played - team1->all_team_games_played;
+        team1->team_UFNode->temp_plays += team2->all_team_games_played;
     }
         //if both teams are not empty
     else if (team1->team_UFNode && team2->team_UFNode){

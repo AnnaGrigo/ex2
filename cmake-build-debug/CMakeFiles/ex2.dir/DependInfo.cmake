@@ -4,24 +4,15 @@ set(CMAKE_DEPENDS_IN_PROJECT_ONLY OFF)
 
 # The set of languages for which implicit dependencies are needed:
 set(CMAKE_DEPENDS_LANGUAGES
-  "CXX"
-  )
-# The set of files for implicit dependencies of each language:
-set(CMAKE_DEPENDS_CHECK_CXX
-  "C:/Users/annag/CLionProjects/ex2/Player.cpp" "C:/Users/annag/CLionProjects/ex2/cmake-build-debug/CMakeFiles/ex2.dir/Player.cpp.obj"
-  "C:/Users/annag/CLionProjects/ex2/Team.cpp" "C:/Users/annag/CLionProjects/ex2/cmake-build-debug/CMakeFiles/ex2.dir/Team.cpp.obj"
-  "C:/Users/annag/CLionProjects/ex2/UnionFind.cpp" "C:/Users/annag/CLionProjects/ex2/cmake-build-debug/CMakeFiles/ex2.dir/UnionFind.cpp.obj"
-  "C:/Users/annag/CLionProjects/ex2/main23a2.cpp" "C:/Users/annag/CLionProjects/ex2/cmake-build-debug/CMakeFiles/ex2.dir/main23a2.cpp.obj"
-  "C:/Users/annag/CLionProjects/ex2/worldcup23a2.cpp" "C:/Users/annag/CLionProjects/ex2/cmake-build-debug/CMakeFiles/ex2.dir/worldcup23a2.cpp.obj"
-  )
-set(CMAKE_CXX_COMPILER_ID "GNU")
-
-# The include file search paths:
-set(CMAKE_CXX_TARGET_INCLUDE_PATH
   )
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "C:/Users/user/CLionProjects/RatuvMivne2/ex2/Player.cpp" "CMakeFiles/ex2.dir/Player.cpp.obj" "gcc" "CMakeFiles/ex2.dir/Player.cpp.obj.d"
+  "C:/Users/user/CLionProjects/RatuvMivne2/ex2/Team.cpp" "CMakeFiles/ex2.dir/Team.cpp.obj" "gcc" "CMakeFiles/ex2.dir/Team.cpp.obj.d"
+  "C:/Users/user/CLionProjects/RatuvMivne2/ex2/UnionFind.cpp" "CMakeFiles/ex2.dir/UnionFind.cpp.obj" "gcc" "CMakeFiles/ex2.dir/UnionFind.cpp.obj.d"
+  "C:/Users/user/CLionProjects/RatuvMivne2/ex2/main23a2.cpp" "CMakeFiles/ex2.dir/main23a2.cpp.obj" "gcc" "CMakeFiles/ex2.dir/main23a2.cpp.obj.d"
+  "C:/Users/user/CLionProjects/RatuvMivne2/ex2/worldcup23a2.cpp" "CMakeFiles/ex2.dir/worldcup23a2.cpp.obj" "gcc" "CMakeFiles/ex2.dir/worldcup23a2.cpp.obj.d"
   )
 
 # Targets to which this target links.
