@@ -35,7 +35,7 @@ StatusType UnionFind::Union_Teams(Team *BuyerTeam, Team *BoughtTeam) {
         Bought->temp_plays += BoughtTeam->all_team_games_played - BuyerTeam->all_team_games_played;
         //update rS
         Bought->rS =  BuyerTeam->team_permutation * Bought->rS;
-        Buyer->rS =  Buyer->rS * (Bought->rS.inv());
+        Buyer->rS =  (Bought->rS.inv()) * Buyer->rS;
         //update team pointer
         Bought->team = Buyer->team;
         Buyer->team = nullptr;

@@ -118,7 +118,7 @@ StatusType world_cup_t::add_player(int playerId, int teamId,
         UF.Union_Players(team->team_UFNode, new_UF);
     }
     team->team_permutation = team->team_permutation * spirit;
-    all_players_by_id.find_HT(playerId)->value.org_team_spirit_join = team->team_permutation;
+    all_players_by_id.find_HT(playerId)->value.org_team_spirit_join = team->team_UFNode->rS.inv() * team->team_permutation ;
     all_players_by_id.find_HT(playerId)->value.games_team_played = team->all_team_games_played + team->team_UFNode->temp_plays;
     if(goalKeeper)
     {
@@ -155,8 +155,8 @@ output_t<int> world_cup_t::play_match(int teamId1, int teamId2)
         return output_t<int>(3);
     }
     else{
-        permutation_t team1_spirit = team1->team_permutation;
-        permutation_t team2_spirit = team2->team_permutation;
+        permutation_t team1_spirit = team1->team_permutation * permutation_t::neutral();
+        permutation_t team2_spirit = team2->team_permutation * permutation_t::neutral();
         if(team1_spirit.strength() > team2_spirit.strength()){
             team1->points += 3;
             return output_t<int>(2);
@@ -256,7 +256,7 @@ output_t<permutation_t> world_cup_t::get_partial_spirit(int playerId)
         return StatusType::FAILURE;
     if(!UF.Find(playerId)->is_active)
         return StatusType::FAILURE;
-    permutation_t spirit = player_node->value.org_team_spirit_join;
+    permutation_t spirit = player_node->value.org_team_spirit_join * permutation_t::neutral();
     while (player_UFNode->parent != nullptr)
     {
         spirit = player_UFNode->rS * spirit;
