@@ -4,8 +4,21 @@
 Team *UnionFind::Find(int id) {
     Player Player = Players->find_HT(id)->value;
     UFNode *node = Player.my_UFNode;
+    permutation_t temp_rS = permutation_t::neutral();
+    int sum_temp_plays = 0;
     while (node->parent != nullptr) {
+        temp_rS = node->rS * temp_rS;
+        sum_temp_plays += node->temp_plays;
         node = node->parent;
+    }
+    UFNode *nodePlayer = Player.my_UFNode;
+    while (nodePlayer != node) {
+        nodePlayer->rS =  temp_rS * permutation_t::neutral();
+        nodePlayer->temp_plays = sum_temp_plays;
+        temp_rS = temp_rS * nodePlayer->rS.inv();
+        sum_temp_plays -= nodePlayer->temp_plays;
+        nodePlayer->parent = node;
+        nodePlayer = nodePlayer->parent;
     }
     return node->team;
 }
@@ -54,3 +67,4 @@ StatusType UnionFind::Union_Players(UFNode *team, UFNode *player) {
     player->team = team->team;
     return StatusType::SUCCESS;
 }
+
